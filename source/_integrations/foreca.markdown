@@ -74,6 +74,7 @@ The `weather.get_forecasts` action reads the forecast the integration has alread
 - Confirm that your subscription is still active in your [Foreca developer account](https://developer.foreca.com).
 - If using a free plan, make sure that you create an account with a verified email address before configuring the integration.
 - A Freemium key that has gone 30 days without any requests is deactivated. Create a new key on the **My API** page.
+- When the key stops working, Home Assistant asks you to re-authenticate the Foreca entry. Enter the new key there; your locations and entities stay as they are.
 
 {% enddetails %}
 
