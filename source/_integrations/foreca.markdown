@@ -41,6 +41,8 @@ Location:
 
 To add another location later, select **Add location** on the Foreca entry under **Settings** > **Devices & services**. One API key covers as many locations as its request limit allows.
 
+To replace the API key, open the three dots {% icon "mdi:dots-vertical" %} menu on the Foreca entry and select **Reconfigure**. The new key is checked before it is saved, and your locations stay as they are.
+
 ## Supported functionality
 
 ### Weather
