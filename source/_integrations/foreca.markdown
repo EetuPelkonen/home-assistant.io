@@ -67,9 +67,16 @@ Each location also gets the latest measurements from the nearest weather station
 
 Where no station reports nearby, the observation sensors show as unknown.
 
+The air quality sensors show the US EPA air quality index for the current hour:
+
+- **Air quality index** and **Dominant pollutant**.
+- An index for each pollutant: **Carbon monoxide index**, **Nitrogen dioxide index**, **Ozone index**, **Sulphur dioxide index**, **PM10 index**, and **PM2.5 index**. These are disabled by default.
+
+These sensors appear only if your plan includes air quality. Without it, the integration skips the air quality request, so each update uses one request fewer. If you add air quality to your plan later, reload the integration to get the sensors.
+
 ## Data updates
 
-The integration {% term polling polls %} the Foreca Weather API every 30 minutes. Each update uses four requests per location, around 192 requests per day for one location, which stays well inside the Freemium plan's daily limit of 2,000 requests. Every location you add polls separately, so that limit allows around 10 of them. Because the integration polls continuously, a Freemium key used this way does not go idle.
+The integration {% term polling polls %} the Foreca Weather API every 30 minutes. Each update uses five requests per location, around 240 requests per day for one location, which stays well inside the Freemium plan's daily limit of 2,000 requests. Every location you add polls separately, so that limit allows around 8 of them. Because the integration polls continuously, a Freemium key used this way does not go idle.
 
 The `weather.get_forecasts` action reads the forecast the integration has already retrieved, so using it in templates and automations costs no extra requests.
 
@@ -101,7 +108,7 @@ The `weather.get_forecasts` action reads the forecast the integration has alread
 
 #### Description
 
-The integration marks entities unavailable when the API cannot be reached or the daily request limit is exceeded. If only the weather station request fails, only the observation sensors are unavailable, and the rest keep updating.
+The integration marks entities unavailable when the API cannot be reached or the daily request limit is exceeded. If only the weather station or air quality request fails, only the sensors that use it are unavailable, and the rest keep updating.
 
 #### Resolution
 
