@@ -74,11 +74,13 @@ The air quality sensors show the US EPA air quality index for the current hour:
 
 These sensors appear only if your plan includes air quality. Without it, the integration skips the air quality request, so each update uses one request fewer. If you add air quality to your plan later, reload the integration to get the sensors.
 
+{% include integrations/actions.md %}
+
 ## Data updates
 
 The integration {% term polling polls %} the Foreca Weather API every 30 minutes. Each update uses five requests per location, around 240 requests per day for one location, which stays well inside the Freemium plan's daily limit of 2,000 requests. Every location you add polls separately, so that limit allows around 8 of them. Because the integration polls continuously, a Freemium key used this way does not go idle.
 
-The `weather.get_forecasts` action reads the forecast the integration has already retrieved, so using it in templates and automations costs no extra requests.
+The `weather.get_forecasts` and `foreca.get_forecasts_extra` actions read the forecast the integration has already retrieved, so using them in templates and automations costs no extra requests.
 
 ## Known limitations
 
