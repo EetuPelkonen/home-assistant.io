@@ -82,6 +82,8 @@ The integration {% term polling polls %} the Foreca Weather API every 30 minutes
 
 The `weather.get_forecasts` and `foreca.get_forecasts_extra` actions read the forecast the integration has already retrieved, so using them in templates and automations costs no extra requests.
 
+The `foreca.get_minute_forecast` action requests fresh data, so each call uses one request.
+
 ## Known limitations
 
 - The API dates a daily forecast rather than timing it, so each daily entry is reported at the start of that day in your Home Assistant time zone.
