@@ -65,13 +65,14 @@ Each location also gets the latest measurements from the nearest weather station
 - **Observed condition**: the weather the station reports, such as sunny, rainy or snowy. Disabled by default.
 - **Observed hourly precipitation**: the precipitation the station measured in its latest full hour. Its **Last reset** attribute shows when that hour started. It shows as unknown when that hour ended more than two hours before the station's latest measurements, for example when the station skips reports.
 - **Observed precipitation type**: the type of that hour's precipitation: rain, sleet, snow, hail, or icing. It shows as unknown when that hour had no precipitation, when the station cannot tell the type, or when the hourly precipitation is unknown. Disabled by default.
+- **Observed 24-hour precipitation**: the station's own total for its latest 24-hour period, which usually ends at 06:00 UTC. **Observed 3-hour precipitation**, **Observed 6-hour precipitation**, and **Observed 12-hour precipitation** give the totals for 3, 6, and 12 hours and are disabled by default. Their **Last reset** attribute shows when each period started. Which periods a station reports varies, and a total shows as unknown when the station does not report that period, or when the period ended more than its own length plus one hour before the station's latest measurements.
 - **Observed apparent temperature**, **Observed pressure**, **Observed wind speed**, **Observed wind gust speed**, **Observed wind direction**, **Observed visibility**, and **Observed snow depth**. These are disabled by default.
 
 Where no station reports nearby, the observation sensors show as unknown.
 
 ## Data updates
 
-The integration {% term polling polls %} the Foreca Weather API every 30 minutes. Each update uses four requests per location, around 192 requests per day for one location, which stays well inside the Freemium plan's daily limit of 2,000 requests. Every location you add polls separately, so that limit allows around 10 of them. Because the integration polls continuously, a Freemium key used this way does not go idle.
+The integration {% term polling polls %} the Foreca Weather API every 30 minutes. Each update uses five requests per location, around 240 requests per day for one location, which stays well inside the Freemium plan's daily limit of 2,000 requests. Every location you add polls separately, so that limit allows around 8 of them. Because the integration polls continuously, a Freemium key used this way does not go idle.
 
 The `weather.get_forecasts` action reads the forecast the integration has already retrieved, so using it in templates and automations costs no extra requests.
 
