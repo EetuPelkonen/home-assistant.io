@@ -2,10 +2,10 @@
 title: "Get extra forecast values"
 action: foreca.get_forecasts_extra
 domain: foreca
-description: "Retrieves Foreca forecast values that the standard forecast has no place for, such as precipitation type, snow, solar radiation, sunshine, and sunrise."
+description: "Retrieves Foreca forecast values that the standard forecast has no place for, such as precipitation type, snow, solar radiation, sunshine, sunrise, and moonrise."
 ---
 
-The **Foreca: Get extra forecast values** action returns forecast values that the standard [`weather.get_forecasts`](/integrations/weather#action-weatherget_forecasts) action has no field for, such as the precipitation type, snow accumulation and depth, solar radiation, sunshine duration, and sunrise and sunset times.
+The **Foreca: Get extra forecast values** action returns forecast values that the standard [`weather.get_forecasts`](/integrations/weather#action-weatherget_forecasts) action has no field for, such as the precipitation type, snow accumulation and depth, solar radiation, sunshine duration, sunrise and sunset times, and the moon phase and moonrise and moonset times.
 
 Use it, for example, to plan solar charging around the expected solar radiation, or to warn about snow on the roads before a morning commute.
 
@@ -83,6 +83,8 @@ Each daily entry includes:
 - `solar_radiation_sum`: the solar energy reaching the ground over the day, in Wh/m².
 - `sunrise` and `sunset`: the times of sunrise and sunset, in UTC.
 - `confidence`: how confident Foreca is in the forecast: `good`, `normal`, or `low`.
+- `moon_phase`: the phase of the moon at midday, in degrees: `0` is a new moon, `90` the first quarter, `180` a full moon, and `270` the last quarter.
+- `moonrise` and `moonset`: the times of moonrise and moonset, in UTC. Empty on a day when the moon does not rise or set.
 
 For a `daily` forecast, the response looks similar to this:
 
@@ -90,25 +92,29 @@ For a `daily` forecast, the response looks similar to this:
 output: |
   weather.home:
     forecast:
-      - datetime: "2026-11-06T00:00:00+02:00"
-        apparent_templow: -4.34
-        max_humidity: 99
-        min_humidity: 58
-        min_dew_point: -0.99
-        min_visibility: 10.0
+      - datetime: "2026-11-09T00:00:00+02:00"
+        apparent_templow: -0.92
+        max_humidity: 100
+        min_humidity: 62
+        min_dew_point: -0.29
+        min_visibility: 3.33
         snow_accumulation: 0.0
         snow_depth: 0.0
-        sunshine_duration: 5.35
-        solar_radiation_sum: 921
-        sunrise: "2026-11-06T05:54:46+00:00"
-        sunset: "2026-11-06T14:11:42+00:00"
+        sunshine_duration: 1.14934
+        solar_radiation_sum: 500
+        sunrise: "2026-11-09T06:02:32+00:00"
+        sunset: "2026-11-09T14:04:19+00:00"
         confidence: good
+        moon_phase: 2
+        moonrise: "2026-11-09T06:53:35+00:00"
+        moonset: "2026-11-09T13:02:54+00:00"
 {% endexample %}
 
 ## Good to know
 
 - The action reads the forecast the integration has already retrieved, so it uses no extra requests.
 - Snow accumulation and depth are the thickness of the snow, not its water equivalent.
+- Foreca gives moonrise and moonset as times of day at the location. The integration looks up the location's time zone when it starts, to turn them into UTC times.
 
 {% include actions/try_it.md %}
 
